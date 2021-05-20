@@ -1,9 +1,0 @@
-﻿  main.cpp
-  Minesweeper.cpp
-C:\Users\user\source\repos\minesweeper\minesweeper\Minesweeper.cpp(41,16): warning C4244: '正在初始化': 將 '_Rep' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
-          with
-          [
-              _Rep=std::chrono::system_clock::rep
-          ]
-  正在產生程式碼...
-  minesweeper.vcxproj -> C:\Users\user\source\repos\minesweeper\Debug\minesweeper.exe
