@@ -1,3 +1,4 @@
+//http://www.cplusplus.com/forum/beginner/235068/
 /*
 * Assignment 09
 * 04/12/18
@@ -9,7 +10,7 @@
 
 using namespace std;
 
-/*¥ş°ìÅÜ¼Æ*/
+/*å…¨åŸŸè®Šæ•¸*/
 const int ROWS = 9;
 const int COLS = 9;
 bool game_over = false;
@@ -17,20 +18,20 @@ char field[ROWS][COLS];
 char secret[ROWS][COLS];
 int win_count = 0;
 
-/*¨ç¦¡­ì«¬*/
+/*å‡½å¼åŸå‹*/
 void rules();
-void random_gopher();/*ÀH¾÷¦a¹p*/
-void create_gopher();/*³Ğ³y¦a¹p*/
-void create_field(char arr[][COLS]);/*³Ğ³yÄæ¦ì¦r¤¸°}¦C*/
-void print_field(char arr[][COLS]);/*¦L¥XÄæ¦ì¦r¤¸°}¦C*/
+void random_gopher();/*éš¨æ©Ÿåœ°é›·*/
+void create_gopher();/*å‰µé€ åœ°é›·*/
+void create_field(char arr[][COLS]);/*å‰µé€ æ¬„ä½å­—å…ƒé™£åˆ—*/
+void print_field(char arr[][COLS]);/*å°å‡ºæ¬„ä½å­—å…ƒé™£åˆ—*/
 //void print_gopher(char arr[][COLS]);
-void choose();/*³]©w¿ï¾Ü*/
-int reveal(int, int);/*Åã¥Ü*/
+void choose();/*è¨­å®šé¸æ“‡*/
+int reveal(int, int);/*é¡¯ç¤º*/
 
 
 
 
-/*¥Dµ{¦¡*/
+/*ä¸»ç¨‹å¼*/
 int main()
 {
 	rules();
@@ -48,7 +49,7 @@ int main()
 		win_count += 1;
 	}
 
-	while (game_over != true && win_count < 71);/*·í¹CÀ¸µ²§ô©MÄ¹ªº¼Æ¥Ø<71*/
+	while (game_over != true && win_count < 71);/*ç•¶éŠæˆ²çµæŸå’Œè´çš„æ•¸ç›®<71*/
 
 	if (game_over == true)
 	{
@@ -60,7 +61,7 @@ int main()
 		cout << "Congrats, you win!" << endl;
 	}
 
-	cin.ignore();/*¶W¹L71ªº¦r¤¸«h³Q©¿²¤*/
+	cin.ignore();/*è¶…é71çš„å­—å…ƒå‰‡è¢«å¿½ç•¥*/
 	cout << "Press enter to exit." << endl;
 	cin.ignore();
 
@@ -69,41 +70,41 @@ int main()
 
 
 
-/*¨ä¥L¨ç¦¡*/
+/*å…¶ä»–å‡½å¼*/
 void rules()
 {
 	cout << "Welcome to gopher hunt!\n\nTo play, enter an X value to pick a row and a Y value to pick a column.\n\n";
 }
 
-void create_field(char field[ROWS][COLS])/*³Ğ³y¦r¤¸Äæ¦ì*/
+void create_field(char field[ROWS][COLS])/*å‰µé€ å­—å…ƒæ¬„ä½*/
 {
 	cout << "Generating field...\n\n";
 	for (int i = 0; i < ROWS; i++)
 	{
-		for (int j = 0; j < COLS; j++)/*·íj=0,j<¦C®É*/
+		for (int j = 0; j < COLS; j++)/*ç•¶j=0,j<åˆ—æ™‚*/
 		{
-			field[i][j] = '+';/*Äæ¦ì°}¦C«hÅã¥Ü'+'*/
+			field[i][j] = '+';/*æ¬„ä½é™£åˆ—å‰‡é¡¯ç¤º'+'*/
 		}
 	}
 }
 
-void print_field(char field[ROWS][COLS])/*¦L¥X¦r¤¸Äæ¦ì*/
+void print_field(char field[ROWS][COLS])/*å°å‡ºå­—å…ƒæ¬„ä½*/
 {
 	for (int a = 0; a < ROWS; a++)
 	{
 		cout << a << " ";
 	}
 
-	cout << COLS;/*¿é¥X¦C*/
+	cout << COLS;/*è¼¸å‡ºåˆ—*/
 	cout << endl;
 
-	for (int i = 0; i < ROWS; i++)/*«Å§ii=0;i<¦æ*/
+	for (int i = 0; i < ROWS; i++)/*å®£å‘Ši=0;i<è¡Œ*/
 	{
-		cout << i + 1 << " ";/*¿é¥Xi+1*/
+		cout << i + 1 << " ";/*è¼¸å‡ºi+1*/
 
-		for (int j = 0; j < COLS; j++)/*«Å§ij=0;j<¦C*/
+		for (int j = 0; j < COLS; j++)/*å®£å‘Šj=0;j<åˆ—*/
 		{
-			cout << field[i][j] << " ";/*¿é¥XÄæ¦ì°}¦C*/
+			cout << field[i][j] << " ";/*è¼¸å‡ºæ¬„ä½é™£åˆ—*/
 		}
 
 		cout << endl;
@@ -135,7 +136,7 @@ cout << endl;
 
 void choose()
 {
-	int horizontal = 0, vertical = 0;/*«Å§i««ª½©M¤ô¥­=0*/
+	int horizontal = 0, vertical = 0;/*å®£å‘Šå‚ç›´å’Œæ°´å¹³=0*/
 	cout << endl;
 	cin >> horizontal;
 	cin >> vertical;
@@ -143,23 +144,23 @@ void choose()
 	horizontal -= 1;
 	vertical -= 1;
 
-	if (horizontal > 8 || horizontal < 0 || vertical > 8 || vertical < 0)/*¦pªG¤ô¥­ªº¼Æ¶q>8©Î¬O¤ô¥­ªº¼Æ¶q<0©Î¬O««ª½ªº¼Æ¶q>8©Î¬O©Î¬O««ª½ªº¼Æ¶q<0*/
+	if (horizontal > 8 || horizontal < 0 || vertical > 8 || vertical < 0)/*å¦‚æœæ°´å¹³çš„æ•¸é‡>8æˆ–æ˜¯æ°´å¹³çš„æ•¸é‡<0æˆ–æ˜¯å‚ç›´çš„æ•¸é‡>8æˆ–æ˜¯æˆ–æ˜¯å‚ç›´çš„æ•¸é‡<0*/
 	{
-		cout << "Illegal move. Try again." << endl;/*«h¿é¥X'¶W¹L³o­Ó½d³ò¡A¦A¸Õ¤@¦¸'*/
+		cout << "Illegal move. Try again." << endl;/*å‰‡è¼¸å‡º'è¶…éé€™å€‹ç¯„åœï¼Œå†è©¦ä¸€æ¬¡'*/
 	}
 
-	if (secret[horizontal][vertical] == 'G')/*¦pªG¦a­±¤Uªº««ª½¤ô¥­°}¦C='G'(½ò¤¤)*/
+	if (secret[horizontal][vertical] == 'G')/*å¦‚æœåœ°é¢ä¸‹çš„å‚ç›´æ°´å¹³é™£åˆ—='G'(è¸©ä¸­)*/
 	{
-		game_over = true;/*«h¹CÀ¸µ²§ô*/
+		game_over = true;/*å‰‡éŠæˆ²çµæŸ*/
 	}
 
 	else
 	{
-		field[horizontal][vertical] = reveal(horizontal, vertical);/*§_«hÄ~Äò*/
+		field[horizontal][vertical] = reveal(horizontal, vertical);/*å¦å‰‡ç¹¼çºŒ*/
 	}
 }
 
-int reveal(int horizontal, int vertical)/*Åã¥Ü««ª½¤ô¥­*/
+int reveal(int horizontal, int vertical)/*é¡¯ç¤ºå‚ç›´æ°´å¹³*/
 {
 	int revealed_number = 0;
 
@@ -190,7 +191,7 @@ int reveal(int horizontal, int vertical)/*Åã¥Ü««ª½¤ô¥­*/
 
 
 
-	switch (revealed_number)/*Åã¥Ü¼Æ¦rªº¶}Ãö*/
+	switch (revealed_number)/*é¡¯ç¤ºæ•¸å­—çš„é–‹é—œ*/
 	{
 	case 0:
 		revealed_number = '0';
@@ -240,7 +241,7 @@ secret[b][c] = 'G';
 
 }*/
 
-void create_gopher()/*³Ğ³y¦a¹p*/
+void create_gopher()/*å‰µé€ åœ°é›·*/
 {
 	secret[2][3] = 'G';
 	secret[5][6] = 'G';
