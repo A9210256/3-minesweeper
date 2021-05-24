@@ -1,8 +1,9 @@
+//https://seckinpoyraz.com/blog/create-minesweeper-in-cpp.html
 #include <iostream>
-#include <vector>/*°}¦Cªº¼ĞÀYÀÉ*/
-#include <algorithm>/*©w¸q¤F¤@¨Ç¨ç¦¡¡A¥i¥H±µ¨ü¨ç¦¡©Î lambda ¹Bºâ¦¡§@¬°¤Ş¼Æ*/
-#include <random>/*ÀH¾÷¶Ã¼Æªº¼ĞÀYÀÉ*/
-#include <chrono>/*¬ö¿ı®É¶¡ªºÃş§Oªº¼ĞÀYÀÉ*/
+#include <vector>/*é™£åˆ—çš„æ¨™é ­æª”*/
+#include <algorithm>/*å®šç¾©äº†ä¸€äº›å‡½å¼ï¼Œå¯ä»¥æ¥å—å‡½å¼æˆ– lambda é‹ç®—å¼ä½œç‚ºå¼•æ•¸*/
+#include <random>/*éš¨æ©Ÿäº‚æ•¸çš„æ¨™é ­æª”*/
+#include <chrono>/*ç´€éŒ„æ™‚é–“çš„é¡åˆ¥çš„æ¨™é ­æª”*/
 #include <windows.h>
 
 using namespace std;
@@ -10,25 +11,25 @@ using namespace std;
 class Minesweeper
 {
 private:
-    int rows;/*«Å§i¦æ*/
-    int columns;/*«Å§i¦C*/
-    int max_size;/*«Å§i³Ì¤j­È*/
-    int bomb_count;/*«Å§i¬µ¼uªº¼Æ¶q*/
-    vector<vector<int>> table; /*¹CÀ¸¤¶­±*/
-    vector<int> bombs; /*¥]§t¬µ¼u¦ì§}ªº°}¦C*/
+    int rows;/*å®£å‘Šè¡Œ*/
+    int columns;/*å®£å‘Šåˆ—*/
+    int max_size;/*å®£å‘Šæœ€å¤§å€¼*/
+    int bomb_count;/*å®£å‘Šç‚¸å½ˆçš„æ•¸é‡*/
+    vector<vector<int>> table; /*éŠæˆ²ä»‹é¢*/
+    vector<int> bombs; /*åŒ…å«ç‚¸å½ˆä½å€çš„é™£åˆ—*/
  
 
     int find_column(int);
     int find_row(int, int);
 
-    void create_table();/*³Ğ³y¤@­Ó¹CÀ¸¤¶­±*/
-    void add_bombs();/*³]¸m¬µ¼u*/
-    void add_numbers();/*³]¸m¼Æ¦r*/
+    void create_table();/*å‰µé€ ä¸€å€‹éŠæˆ²ä»‹é¢*/
+    void add_bombs();/*è¨­ç½®ç‚¸å½ˆ*/
+    void add_numbers();/*è¨­ç½®æ•¸å­—*/
 
-    void show_table();/*³]¸mÅã¥Ü¤¶­±*/
+    void show_table();/*è¨­ç½®é¡¯ç¤ºä»‹é¢*/
 
 public:
     Minesweeper(int columns_get = 9, int rows_get = 9, int bomb_count_get = 10);
-    ~Minesweeper();/*¸ÑºcªÌ*/
+    ~Minesweeper();/*è§£æ§‹è€…*/
 
 };
