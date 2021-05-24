@@ -150,12 +150,12 @@ void  Minesweeper::playMinesweeper() {
         displayBoard(gameBoard);
         cout << flags << " flags left" << endl << endl;
         char x, y, z;
-        cout << "Enter your move, (row, column, safe(s)/flag(f)) -> ";
+        cout << "Enter your move, (¡õ, ¡÷, safe(s)/flag(f)) -> ";
         cin >> x >> y >> z;
-        cout << endl;
-
         int row = charToIndex(x);
         int col = charToIndex(y);
+        cout << endl;
+
 
         if (nMoves == 0)
             if (isMine(row, col, mineBoard))

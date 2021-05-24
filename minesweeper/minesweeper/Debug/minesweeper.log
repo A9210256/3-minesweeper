@@ -1,3 +1,4 @@
-﻿  main.cpp
-C:\Users\user\source\repos\minesweeper\minesweeper\main.cpp(5,15): warning C4244: '引數': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
-  minesweeper.vcxproj -> C:\Users\user\source\repos\minesweeper\Debug\minesweeper.exe
+﻿  Minesweeper.cpp
+C:\Users\user\OneDrive\力菁\文化\物件導向程式設計\minesweeper\minesweeper\Minesweeper.cpp(106,23): warning C4018: '<': signed/unsigned 不相符
+C:\Users\user\OneDrive\力菁\文化\物件導向程式設計\minesweeper\minesweeper\Minesweeper.cpp(119,27): warning C4018: '<': signed/unsigned 不相符
+  minesweeper.vcxproj -> C:\Users\user\OneDrive\力菁\文化\物件導向程式設計\minesweeper\Debug\minesweeper.exe
