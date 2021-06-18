@@ -3,110 +3,110 @@
 Minesweeper::Minesweeper(int columns_get, int rows_get, int bomb_count_get) :
     rows{ rows_get }, columns{ columns_get }, max_size{ rows * columns }, bomb_count{ bomb_count_get }
 {
-    /*ªì©l¤ÆÅÜ¼ÆµM«á¶}©l¶]¥H¤Uªº¨ç¦¡*/
-    create_table(); /*³Ğ³y¤¶­±*/
-    add_bombs(); /*³]¸m¬µ¼u*/
-    add_numbers(); /*³]¸m¼Æ¦r*/
-    show_table(); /*Åã¥Ü¤¶­±*/
+    /*åˆå§‹åŒ–è®Šæ•¸ç„¶å¾Œé–‹å§‹è·‘ä»¥ä¸‹çš„å‡½å¼*/
+    create_table(); /*å‰µé€ ä»‹é¢*/
+    add_bombs(); /*è¨­ç½®ç‚¸å½ˆ*/
+    add_numbers(); /*è¨­ç½®æ•¸å­—*/
+    show_table(); /*é¡¯ç¤ºä»‹é¢*/
 }
 
-Minesweeper::~Minesweeper()/*³]¸m¤@­Ó¸ÑºcªÌ¥h«O¦s¤@­Ó°O¾ĞÅé*/
+Minesweeper::~Minesweeper()/*è¨­ç½®ä¸€å€‹è§£æ§‹è€…å»ä¿å­˜ä¸€å€‹è¨˜æ†¶é«”*/
 {
 
 }
 
-void Minesweeper::create_table() {
-    table.resize(rows, vector<int>(columns, 0)); /*Åı§O¤Hµ¹ªºrows,columnsªº­È¥h³]¸m¤j¤p*/
+void Minesweeper::create_table() {/*è¨­ç½®éŠæˆ²ä»‹é¢*/
+    table.resize(rows, vector<int>(columns, 0)); /*è®“åˆ¥äººçµ¦çš„rows,columnsçš„å€¼å»è¨­ç½®å¤§å°*/
 }
 
-void Minesweeper::add_bombs() {
+void Minesweeper::add_bombs() {/*è¨­ç½®åŠ å…¥ç‚¸å½ˆ*/
 
    
     for (int i{ 1 }; i <= max_size; ++i) {
-        bombs.push_back(i);/*·s¼W¤¸¯À¨ì¬µ¼uªº§Àºİ*/
+        bombs.push_back(i);/*æ–°å¢å…ƒç´ åˆ°ç‚¸å½ˆçš„å°¾ç«¯*/
     }
 
     unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-    /*Åı¨t²Îªº®É¶¡½d³òÀH¾÷µo°t*/
+    /*è®“ç³»çµ±çš„æ™‚é–“ç¯„åœéš¨æ©Ÿç™¼é…*/
     
     shuffle(bombs.begin(), bombs.end(), default_random_engine(seed));
-    /*¬µ¼uªºÀH¾÷©ñ¸m*/
+    /*ç‚¸å½ˆçš„éš¨æ©Ÿæ”¾ç½®*/
  
-    bombs.reserve(bomb_count);/*§ïÅÜ¬µ¼uªº¤À°tªÅ¶¡¡A¨ÃµLªì©l¤Æ*/
-    bombs.resize(bomb_count);/*§ïÅÜ¬µ¼uªº¤À°tªÅ¶¡¡A¦Ó¥B¥ş³¡ªì©l¤Æ*/
+    bombs.reserve(bomb_count);/*æ”¹è®Šç‚¸å½ˆçš„åˆ†é…ç©ºé–“ï¼Œä¸¦ç„¡åˆå§‹åŒ–*/
+    bombs.resize(bomb_count);/*æ”¹è®Šç‚¸å½ˆçš„åˆ†é…ç©ºé–“ï¼Œè€Œä¸”å…¨éƒ¨åˆå§‹åŒ–*/
 
 }
 
-int Minesweeper::find_column(int a) {
-    /*­pºâ¤@¦C¦³¦h¤Ö*/
+int Minesweeper::find_column(int a) {/*æ‰¾åˆ°åˆ—è£¡é¢çš„æ²’æœ‰è¸©åˆ°ç‚¸å½ˆçš„æ•¸é‡*/
+    /*è¨ˆç®—ä¸€åˆ—æœ‰å¤šå°‘*/
     int column_of_it{ 0 };
     if (a % columns == 0) {
-        column_of_it = columns;/*¦pªGa­è¦n¾ã°£¡A¨º´N¬O¤@¦æ*/
+        column_of_it = columns;/*å¦‚æœaå‰›å¥½æ•´é™¤ï¼Œé‚£å°±æ˜¯ä¸€è¡Œ*/
     }
     else {
-        column_of_it = a % columns;/*¦pªG¤£¬O´NÄ~Äò°£*/
+        column_of_it = a % columns;/*å¦‚æœä¸æ˜¯å°±ç¹¼çºŒé™¤*/
     }
-    return column_of_it;/*¤@ª½¦^¶Ç*/
+    return column_of_it;/*ä¸€ç›´å›å‚³*/
 }
 
 int Minesweeper::find_row(int a, int column) {
   
-    int row_of_it{ ((a - column) / columns) + 1 };/*a-¦C¼Æ/¦C¼Æ=¦æ*/
+    int row_of_it{ ((a - column) / columns) + 1 };/*a-åˆ—æ•¸/åˆ—æ•¸=è¡Œ*/
     return row_of_it;
 }
 
-void Minesweeper::add_numbers() {
+void Minesweeper::add_numbers() {/*è¨­ç½®åŠ å…¥æ•¸é‡*/
    
-    int column_of_the_bomb_real{};/*«Å§i¤@¦Cªº¬µ¼u¼Æ¶q*/
-    int row_of_the_bomb_real{};/*«Å§i¤@¦æªº¬µ¼u¼Æ¶q*/
-    int column_of_the_bomb{}; /*Åı¤@¦Cªº°}¦C­«·sÂk¹s*/
-    int row_of_the_bomb{}; /*Åı¤@¦æªº°}¦C­«·sÂk¹s*/
+    int column_of_the_bomb_real{};/*å®£å‘Šä¸€åˆ—çš„ç‚¸å½ˆæ•¸é‡*/
+    int row_of_the_bomb_real{};/*å®£å‘Šä¸€è¡Œçš„ç‚¸å½ˆæ•¸é‡*/
+    int column_of_the_bomb{}; /*è®“ä¸€åˆ—çš„é™£åˆ—é‡æ–°æ­¸é›¶*/
+    int row_of_the_bomb{}; /*è®“ä¸€è¡Œçš„é™£åˆ—é‡æ–°æ­¸é›¶*/
 
     for (auto bomb : bombs) {
 
-        column_of_the_bomb_real = find_column(bomb); /*´M§ä¤@¦C¤§¤¤ªº¬µ¼u*/
-        row_of_the_bomb_real = find_row(bomb, column_of_the_bomb_real); /*´M§ä¤@¦æ¤§¤¤ªº¬µ¼u*/
-        column_of_the_bomb = column_of_the_bomb_real - 1; 
-        row_of_the_bomb = row_of_the_bomb_real - 1; 
+        column_of_the_bomb_real = find_column(bomb); /*å°‹æ‰¾ä¸€åˆ—ä¹‹ä¸­çš„ç‚¸å½ˆ*/
+        row_of_the_bomb_real = find_row(bomb, column_of_the_bomb_real); /*å°‹æ‰¾ä¸€è¡Œä¹‹ä¸­çš„ç‚¸å½ˆ*/
+        column_of_the_bomb = column_of_the_bomb_real - 1; /*ä¸€åˆ—çš„ç‚¸å½ˆ=çœŸæ­£æ”¾ç½®ç‚¸å½ˆçš„æ•¸é‡-1*/
+        row_of_the_bomb = row_of_the_bomb_real - 1; /*ä¸€è¡Œçš„ç‚¸å½ˆ=çœŸæ­£æ”¾ç½®ç‚¸å½ˆçš„æ•¸é‡-1*/
 
-        /*°Ï°ì1*/
-        if (row_of_the_bomb != 0 && column_of_the_bomb != 0) /*¤@¦æ©M¤@¦C¤§¤¤ªº¬µ¼u¤£µ¥©ó¹s*/
+        /*å€åŸŸ1*/
+        if (row_of_the_bomb != 0 && column_of_the_bomb != 0) /*ä¸€è¡Œå’Œä¸€åˆ—ä¹‹ä¸­çš„ç‚¸å½ˆä¸ç­‰æ–¼é›¶*/
             table[row_of_the_bomb - 1][column_of_the_bomb - 1] += 1;
 
-        /*°Ï°ì2*/
+        /*å€åŸŸ2*/
         if (row_of_the_bomb != 0) 
-            table[row_of_the_bomb - 1][column_of_the_bomb] += 1;/*¦pªG¤¶­±¤Wªº¦æªº¬µ¼u¤£µ¥©ó¹s¡A¨º¦æ-1,¦C¤£ÅÜ*/
+            table[row_of_the_bomb - 1][column_of_the_bomb] += 1;/*å¦‚æœä»‹é¢ä¸Šçš„è¡Œçš„ç‚¸å½ˆä¸ç­‰æ–¼é›¶ï¼Œé‚£è¡Œ-1,åˆ—ä¸è®Š*/
 
-        /*°Ï°ì3*/
-        if (row_of_the_bomb != 0 && column_of_the_bomb != columns - 1) /*¦pªG¦æ©ñªº¬µ¼u¤£µ¥©ó¹s¸ò¦C©ñªº¬µ¼u¤£µ¥©ó¦C-1*/
-            table[row_of_the_bomb - 1][column_of_the_bomb + 1] += 1;/*«h¦C-1¡A¦æ+1*/
+        /*å€åŸŸ3*/
+        if (row_of_the_bomb != 0 && column_of_the_bomb != columns - 1) /*å¦‚æœè¡Œæ”¾çš„ç‚¸å½ˆä¸ç­‰æ–¼é›¶è·Ÿåˆ—æ”¾çš„ç‚¸å½ˆä¸ç­‰æ–¼åˆ—-1*/
+            table[row_of_the_bomb - 1][column_of_the_bomb + 1] += 1;/*å‰‡åˆ—-1ï¼Œè¡Œ+1*/
 
-        /*°Ï°ì4*/
-        if (column_of_the_bomb != 0) /*¦pªG¤¶­±¤Wªº¦Cªº¬µ¼u¤£µ¥©ó¹s¡A¨º¦æ¤£ÅÜ,¦C¤£-1*/
+        /*å€åŸŸ4*/
+        if (column_of_the_bomb != 0) /*å¦‚æœä»‹é¢ä¸Šçš„åˆ—çš„ç‚¸å½ˆä¸ç­‰æ–¼é›¶ï¼Œé‚£è¡Œä¸è®Š,åˆ—ä¸-1*/
             table[row_of_the_bomb][column_of_the_bomb - 1] += 1;
 
-        /*°Ï°ì5*/
-        if (column_of_the_bomb != columns - 1) /*¦pªG¤¶­±¤Wªº¦Cªº¬µ¼u¤£µ¥©ó¦C-1¡A¨º¦æ¤£ÅÜ,¦C+1*/
+        /*å€åŸŸ5*/
+        if (column_of_the_bomb != columns - 1) /*å¦‚æœä»‹é¢ä¸Šçš„åˆ—çš„ç‚¸å½ˆä¸ç­‰æ–¼åˆ—-1ï¼Œé‚£è¡Œä¸è®Š,åˆ—+1*/
             table[row_of_the_bomb][column_of_the_bomb + 1] += 1;
 
-        /*°Ï°ì6*/
-        if (row_of_the_bomb != rows - 1 && column_of_the_bomb != 0) /*¦pªG¦æ©ñªº¬µ¼u¤£µ¥©ó¹s¸ò¦C©ñªº¬µ¼u¤£µ¥©ó¦C-1*/
-            table[row_of_the_bomb + 1][column_of_the_bomb - 1] += 1;/*«h¦C-1,¦æ+1*/
+        /*å€åŸŸ6*/
+        if (row_of_the_bomb != rows - 1 && column_of_the_bomb != 0) /*å¦‚æœè¡Œæ”¾çš„ç‚¸å½ˆä¸ç­‰æ–¼é›¶è·Ÿåˆ—æ”¾çš„ç‚¸å½ˆä¸ç­‰æ–¼åˆ—-1*/
+            table[row_of_the_bomb + 1][column_of_the_bomb - 1] += 1;/*å‰‡åˆ—-1,è¡Œ+1*/
 
-        /*°Ï°ì7*/
-        if (row_of_the_bomb != rows - 1) /*¦pªG¦æ©ñªº¬µ¼u¤£µ¥©ó¦æ-1*/
-            table[row_of_the_bomb + 1][column_of_the_bomb] += 1;/*«h¦æ+1,¦C¤£ÅÜ*/
+        /*å€åŸŸ7*/
+        if (row_of_the_bomb != rows - 1) /*å¦‚æœè¡Œæ”¾çš„ç‚¸å½ˆä¸ç­‰æ–¼è¡Œ-1*/
+            table[row_of_the_bomb + 1][column_of_the_bomb] += 1;/*å‰‡è¡Œ+1,åˆ—ä¸è®Š*/
 
-        /*°Ï°ì8*/
-        if (row_of_the_bomb != rows - 1 && column_of_the_bomb != columns - 1) /*¦pªG¦æ©ñªº¬µ¼u¤£µ¥©ó¦æ-1©M¯P©ñªº¬µ¼u¤£µ¥©ó¦C-1*/
-            table[row_of_the_bomb + 1][column_of_the_bomb + 1] += 1;/*«h¦æ+1,¦C+1*/
+        /*å€åŸŸ8*/
+        if (row_of_the_bomb != rows - 1 && column_of_the_bomb != columns - 1) /*å¦‚æœè¡Œæ”¾çš„ç‚¸å½ˆä¸ç­‰æ–¼è¡Œ-1å’Œçƒˆæ”¾çš„ç‚¸å½ˆä¸ç­‰æ–¼åˆ—-1*/
+            table[row_of_the_bomb + 1][column_of_the_bomb + 1] += 1;/*å‰‡è¡Œ+1,åˆ—+1*/
 
     }
 
 
 }
 
-void Minesweeper::show_table() {
+void Minesweeper::show_table() {/*è¨­ç½®é¡¯ç¤ºéŠæˆ²ä»‹é¢*/
     //print the 2D vector table
 
     int square_of_the_bomb{ 0 };
