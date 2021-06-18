@@ -19,8 +19,8 @@ private:
     vector<int> bombs; /*包含炸彈位址的陣列*/
  
 
-    int find_column(int);
-    int find_row(int, int);
+    int find_column(int);/*宣告找到列*/
+    int find_row(int, int);/*宣告找到行*/
 
     void create_table();/*創造一個遊戲介面*/
     void add_bombs();/*設置炸彈*/
@@ -29,7 +29,7 @@ private:
     void show_table();/*設置顯示介面*/
 
 public:
-    Minesweeper(int columns_get = 9, int rows_get = 9, int bomb_count_get = 10);
+    Minesweeper(int columns_get = 9, int rows_get = 9, int bomb_count_get = 10);/*踩地雷的規格*/
     ~Minesweeper();/*解構者*/
 
 };
