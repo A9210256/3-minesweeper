@@ -150,10 +150,33 @@ void  Minesweeper::playMinesweeper() {
         displayBoard(gameBoard);
         cout << flags << " flags left" << endl << endl;
         char x, y, z;
-        cout << "Enter your move, (¡õ, ¡÷, safe(s)/flag(f)) -> ";
-        cin >> x >> y >> z;
+
+        cout << "Enter your move(0~" << indexToChar(ROWS - 1) << "), (¡õ) -> ";
+        cin >> x;
         int row = charToIndex(x);
+        while (row >= ROWS) {
+            cout << "Please enter(0~" << indexToChar(ROWS - 1) << "), (¡õ) ->";
+            cin >> x;
+            row = charToIndex(x);
+        }
+
+        cout << "Enter your move(0~" << indexToChar(COLUMNS - 1) << "), (¡÷) -> ";
+        cin >> y;
         int col = charToIndex(y);
+        while (col >= COLUMNS) {
+            cout << "Please enter(0~" << indexToChar(COLUMNS - 1) << "), (¡÷) ->";
+            cin >> y;
+            col = charToIndex(y);
+        }
+
+        cout << "Enter your move, (safe(s)/flag(f)) -> ";
+        cin >> z;
+        while (z != 's' && z != 'S' && z != 'f' && z != 'F') {
+            cout << "Please enter(safe(s)/flag(f)) -> ";
+            cin >> z;
+        }
+        
+        
         cout << endl;
 
 
