@@ -49,14 +49,14 @@ int main()
 		win_count += 1;
 	}
 
-	while (game_over != true && win_count < 71);/*當遊戲結束和贏的數目<71*/
+	while (game_over != true && win_count < 71);/*當遊戲結束是正確的和贏的數目<71*/
 
-	if (game_over == true)
+	if (game_over == true)/*如果遊戲結束是對的*/
 	{
 		cout << "You chose a gopher! Game over!" << endl;
 	}
 
-	if (win_count > 71)
+	if (win_count > 71)/*如果贏的數目>71*/
 	{
 		cout << "Congrats, you win!" << endl;
 	}
@@ -71,7 +71,7 @@ int main()
 
 
 /*其他函式*/
-void rules()
+void rules()/*設置規則*/
 {
 	cout << "Welcome to gopher hunt!\n\nTo play, enter an X value to pick a row and a Y value to pick a column.\n\n";
 }
@@ -134,7 +134,7 @@ cout << endl;
 }
 }*/
 
-void choose()
+void choose()/*設置選擇*/
 {
 	int horizontal = 0, vertical = 0;/*宣告垂直和水平=0*/
 	cout << endl;
