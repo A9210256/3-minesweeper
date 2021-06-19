@@ -15,7 +15,7 @@ int main() {
 
         int board;
         cin >> board;
-        switch (board) {/*单ぃ狾縩计秖穦ぃ*/
+        switch (board) {/*单ぃ狾縩筽计秖穦ぃ*/
         case 0:
             gameboard.setRows(10);
             gameboard.setColumns(10);

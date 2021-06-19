@@ -1,6 +1,6 @@
 ﻿#include "Minesweeper.h"
 
-Minesweeper::Minesweeper(int ROWS, int COLUMNS, int MINES) {
+Minesweeper::Minesweeper(int ROWS, int COLUMNS, int MINES) {/*物件的初始建構值*/
     this->ROWS = ROWS;
     this->COLUMNS = COLUMNS;
     this->MINES = MINES;
@@ -30,14 +30,14 @@ void  Minesweeper::clearBoards(char mineBoard[][30], char gameBoard[][30]) {//�
 }
 
 void  Minesweeper::placeMines(char mineBoard[][30], int mines) {//放置地雷
-    int placed = 0;//設一個變數(放置)=0
-    while (placed < mines) {//當地雷的數>能放置的數
-        int random = rand() % (ROWS * COLUMNS);//取行列的亂數
+    int placed = 0;//設一個變數(已放置的地雷數)=0
+    while (placed < mines) {//要放的地雷數>已放置的地雷數
+        int random = rand() % (ROWS * COLUMNS);//取一個亂數%(ROWS * COLUMNS)，讓亂數介於(ROWS * COLUMNS)的值內
         int row = random / COLUMNS;//行=亂數/列
-        int col = random % ROWS;//亂數對行取餘數=列
-        if (mineBoard[row][col] == '#') continue; // 如果碰到地雷顯示'#'，就繼續
-        mineBoard[row][col] = '#';
-        placed++;
+        int col = random % ROWS;//對(亂數/行)取餘數=列
+        if (mineBoard[row][col] == '#') continue; // 如果碰到地雷顯示'#'，就繼續(直接跳過以下步驟，回到while的條件判斷，重新執行迴圈)
+        mineBoard[row][col] = '#';//如果不是，則設為地雷
+        placed++;//已放置的地雷數加一
     }
 }
 void  Minesweeper::replaceMine(int row, int col, char mineBoard[][30]) {//重新放置地雷
