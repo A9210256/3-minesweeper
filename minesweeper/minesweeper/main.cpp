@@ -40,7 +40,7 @@ int main() {
         }
     }
 
-    gameboard.playMinesweeper();/*開始踩地雷*/
+    gameboard.playMinesweeper();//呼叫物件，開始踩地雷
 
     return 0;
 }

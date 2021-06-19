@@ -47,7 +47,7 @@ void  Minesweeper::replaceMine(int row, int col, char mineBoard[][30]) {//重新
 }
 char  Minesweeper::indexToChar(int index) {
     if (index < 10)//如果索引值<10
-        return index + '0';//回傳字元索引/
+        return index + '0';//回傳字元到索引值/
     else
         return 'a' + (index - 10);//否則回傳97(ASCII'a')+(索引-10)
 }
@@ -81,7 +81,7 @@ void  Minesweeper::displayBoard(char gameBoard[][30]) {//設置展示遊戲版�
 
     return;
 }
-bool  Minesweeper::isValid(int row, int col) {//回傳行列的數目是否為正確
+bool  Minesweeper::isValid(int row, int col) {//行列的數目是否為正確
     return (row >= 0) && (row < ROWS) && (col >= 0) && (col < COLUMNS);//回傳(行>=0和行<設置的數目)和(列>=0和列<設置的數目)
 }
 
