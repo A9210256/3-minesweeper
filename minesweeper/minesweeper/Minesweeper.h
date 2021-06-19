@@ -29,11 +29,11 @@ public:
     void displayBoard(char gameBoard[][30]);/*設置展示遊戲版面*/
     bool isValid(int row, int col);/*確定行列的數目是否為正確*/
     bool isMine(int row, int col, char board[][30]);/*回傳地雷的數目是否為正確，且放置在地板之內*/
-    vector < pair <int, int> > getNeighbours(int row, int col);/*陣列的pair可以將一對值組合成一個值*/
-    int countAdjacentMines(int row, int col, char mineBoard[][30]);/*相鄰的地雷數目*/
-    void uncoverBoard(char gameBoard[][30], char mineBoard[][30], int row, int col, int* nMoves);/*設置揭開地板*/
-    void markMines(char gameBoard[][30], char mineBoard[][30], bool won);/*設置標記的地雷*/
-    void playMinesweeper();/*設置開始踩地雷*/
+    vector < pair <int, int> > getNeighbours(int row, int col);/*陣列的pair可以將一對值，合成一個值*/
+    int countAdjacentMines(int row, int col, char mineBoard[][30]);/*數相鄰的地雷數目*/
+    void uncoverBoard(char gameBoard[][30], char mineBoard[][30], int row, int col, int* nMoves);//設置揭開地板(移動)
+    void markMines(char gameBoard[][30], char mineBoard[][30], bool won);//確認是否標記正確的地雷
+    void playMinesweeper();//踩地雷
 
 };
 

@@ -82,14 +82,14 @@ void  Minesweeper::displayBoard(char gameBoard[][30]) {//設置展示遊戲版�
     return;
 }
 bool  Minesweeper::isValid(int row, int col) {//行列的數目是否為正確
-    return (row >= 0) && (row < ROWS) && (col >= 0) && (col < COLUMNS);//回傳(行>=0和行<設置的數目)和(列>=0和列<設置的數目)
+    return (row >= 0) && (row < ROWS) && (col >= 0) && (col < COLUMNS);//回傳1 or 0(行>=0和行<設置的數目)和(列>=0和列<設置的數目)
 }
 
 bool  Minesweeper::isMine(int row, int col, char board[][30]) {//回傳地雷的數目是否為正確，且放置在地板之內
-    return (board[row][col] == '#');//回傳地板的行列
+    return (board[row][col] == '#');//回傳1 or 0(地板的位置)
 }
-vector < pair <int, int> >  Minesweeper::getNeighbours(int row, int col) {//陣列的pair可以將一對值組合成一個值
-    vector < pair <int, int> > neighbours;//陣列的pair可以將一對值組合成一個值給neighbours這個變數
+vector < pair <int, int> >  Minesweeper::getNeighbours(int row, int col) {//陣列的pair可以將一對值，合成一個值
+    vector < pair <int, int> > neighbours;//陣列的pair可以將一對值，合成一個值，給neighbours這個變數
 
     for (int dx = -1; dx <= 1; dx++)
         for (int dy = -1; dy <= 1; dy++)
@@ -99,30 +99,30 @@ vector < pair <int, int> >  Minesweeper::getNeighbours(int row, int col) {//陣�
 
     return neighbours;
 }
-int  Minesweeper::countAdjacentMines(int row, int col, char mineBoard[][30]) {//相鄰的地雷數目
-    vector < pair <int, int> > neighbours = getNeighbours(row, col);//陣列的pair可以將一對值組合成一個值給neighbours這個變數產生getNeighbours(新的pair)
+int  Minesweeper::countAdjacentMines(int row, int col, char mineBoard[][30]) {//數相鄰的地雷數目
+    vector < pair <int, int> > neighbours = getNeighbours(row, col);//陣列的pair可以將一對值，合成一個值給neighbours，產生getNeighbours(新的pair)
 
     int count = 0;//設置數目為0
     for (int i = 0; i < neighbours.size(); i++)
         if (isMine(neighbours[i].first, neighbours[i].second, mineBoard))//如果neighbours第一個,第二個地雷在地版上
-            count++;//數目增加
+            count++;//地雷數目增加
 
-    return count;//回傳數目
+    return count;//回傳相鄰的地雷數
 }
-void  Minesweeper::uncoverBoard(char gameBoard[][30], char mineBoard[][30], int row, int col, int* nMoves) {//設置揭開地板
+void  Minesweeper::uncoverBoard(char gameBoard[][30], char mineBoard[][30], int row, int col, int* nMoves) {//設置揭開地板(移動)
     (*nMoves)++;//移動的位值增加
     int count = countAdjacentMines(row, col, mineBoard);//數目=相鄰的地雷數目
     gameBoard[row][col] = count + '0';//遊戲版的[行][列]=數目+48(變成字元
     if (count == 0) {//如果數目=0
-        vector < pair <int, int> > neighbours = getNeighbours(row, col);//陣列的pair可以將一對值組合成一個值給neighbours這個變數產生getNeighbours(新的pair)
+        vector < pair <int, int> > neighbours = getNeighbours(row, col);//陣列的pair可以將一對值，合成一個值給neighbours，產生getNeighbours(新的pair)
 
         for (int i = 0; i < neighbours.size(); i++)
             if (gameBoard[neighbours[i].first][neighbours[i].second] == '.')//如果遊戲版的[行][列]='.'
-                uncoverBoard(gameBoard, mineBoard, neighbours[i].first, neighbours[i].second, nMoves);//揭開地板(遊戲地板,地雷地板,[行],[列],移動的位值)
+                uncoverBoard(gameBoard, mineBoard, neighbours[i].first, neighbours[i].second, nMoves);//揭開地板(遊戲地板,地雷地板,[行],[列],移動的位置)
     }
 }
 
-void  Minesweeper::markMines(char gameBoard[][30], char mineBoard[][30], bool won) {//設置標記的地雷
+void  Minesweeper::markMines(char gameBoard[][30], char mineBoard[][30], bool won) {//確認是否標記正確的地雷
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLUMNS; j++) {
             if (gameBoard[i][j] == '.' && mineBoard[i][j] == '#') {//如果遊戲版安全的行列顯示'.'與地雷版的行列顯示'#'
@@ -136,7 +136,7 @@ void  Minesweeper::markMines(char gameBoard[][30], char mineBoard[][30], bool wo
         }
     }
 }
-void  Minesweeper::playMinesweeper() {//設置玩踩地雷
+void  Minesweeper::playMinesweeper() {//玩踩地雷
     char mineBoard[30][30], gameBoard[30][30];//地雷的數[行=30][列=30],安全地的數[行=30][列=30]
     int nMovesTotal = ROWS * COLUMNS - MINES;//移動次數=行數*列數-地雷數
     int flags = MINES;//設一個變數為地雷數
