@@ -45,17 +45,17 @@ void  Minesweeper::replaceMine(int row, int col, char mineBoard[][30]) { //重�
     mineBoard[row][col] = '.'; //重置那格位置
     return;
 }
-char  Minesweeper::indexToChar(int index) { //傳索引值到字元
+char  Minesweeper::indexToChar(int index) { //將數字變為字元
     if (index < 10)//如果索引值<10
         return index + '0';//回傳索引值到字元
     else
-        return 'a' + (index - 10);//否則回傳97+(索引-10)    (97=ASCII'a')
+        return 'a' + (index - 10);//否則回傳97+(索引-10) (97=ASCII'a') 使回傳字元為a~j
 }
-int  Minesweeper::charToIndex(char ch) { //傳字元到索引值
+int  Minesweeper::charToIndex(char ch) { //將字元變為數字
     if (ch <= '9')//如果字元<=9
         return ch - '0';//回傳字元-48
     else
-        return (ch - 'a') + 10;//否則(字元-97)+10    (97=ASCII'a')
+        return (ch - 'a') + 10;//否則(字元-97)+10    (97=ASCII'a') 將字元a~j變為10~19以符合地雷面板
 }
 void  Minesweeper::displayBoard(char gameBoard[][30]) { //設置展示遊戲版面
    //最頂部
@@ -85,8 +85,8 @@ bool  Minesweeper::isValid(int row, int col) { //行列的數目是否為正確
     return (row >= 0) && (row < ROWS) && (col >= 0) && (col < COLUMNS);//回傳 1 or 0 (行>=0和行<設置的數目)和(列>=0和列<設置的數目)
 }
 
-bool  Minesweeper::isMine(int row, int col, char board[][30]) { //回傳地雷的數目是否為正確，且放置在地板之內
-    return (board[row][col] == '#');//回傳 1 or 0 (地板的位置)
+bool  Minesweeper::isMine(int row, int col, char board[][30]) { //查看此位置是否為地雷
+    return (board[row][col] == '#');//回傳 1 or 0 (那個位置是否為地雷)
 }
 vector < pair <int, int> >  Minesweeper::getNeighbours(int row, int col) { //陣列的pair可以將一對值，合成一個值
     vector < pair <int, int> > neighbours;//陣列的pair可以將一對值，合成一個值，給neighbours這個變數
@@ -151,20 +151,20 @@ void  Minesweeper::playMinesweeper() { //玩踩地雷
         cout << flags << " flags left" << endl << endl;//輸出剩下的地雷
         char x, y, z;//設要輸入的值
         //開始遊戲
-        cout << "Enter your move(0~" << indexToChar(ROWS - 1) << "), (¡õ) -> ";//顯示輸入移動，開始索引轉變字元(行-1)
+        cout << "Enter your move(0~" << indexToChar(ROWS - 1) << "), (row) -> ";//顯示輸入移動，開始索引轉變字元(行-1)
         cin >> x;//輸入移動(行)
         int row = charToIndex(x);//設置行=字元索引(x)
         while (row >= ROWS) { //當移動行的次數>行設置的數目，再輸入一次
-            cout << "Please enter(0~" << indexToChar(ROWS - 1) << "), (¡õ) ->";
+            cout << "Please enter(0~" << indexToChar(ROWS - 1) << "), (row) ->";
             cin >> x;
             row = charToIndex(x);//行=字元索引(x)
         }
 
-        cout << "Enter your move(0~" << indexToChar(COLUMNS - 1) << "), (¡÷) -> ";
+        cout << "Enter your move(0~" << indexToChar(COLUMNS - 1) << "), (columns) -> ";
         cin >> y;//輸入移動(列)
         int col = charToIndex(y);//設置列=字元索引(y)
         while (col >= COLUMNS) { //當移動列的次數>列設置的數目，再輸入一次
-            cout << "Please enter(0~" << indexToChar(COLUMNS - 1) << "), (¡÷) ->";
+            cout << "Please enter(0~" << indexToChar(COLUMNS - 1) << "), (columns) ->";
             cin >> y;
             col = charToIndex(y);//列=字元索引(y)
         }
@@ -191,7 +191,7 @@ void  Minesweeper::playMinesweeper() { //玩踩地雷
                     markMines(gameBoard, mineBoard, true);//確認是否標記正確的地雷
                     displayBoard(gameBoard);//展示遊戲地板
                     cout << endl << "You won!!! :)" << endl;
-                    gameOver = true;//ture已結束遊戲的遞迴
+                    gameOver = true;//ture以結束遊戲的迴圈
                 }
             }
             else if (gameBoard[row][col] == '.' && mineBoard[row][col] == '#') { //否則如果遊戲地板[行][列]顯示為'.'，地雷版為[行][列]顯示為'#'
@@ -199,7 +199,7 @@ void  Minesweeper::playMinesweeper() { //玩踩地雷
                 markMines(gameBoard, mineBoard, false);//確認是否標記正確的地雷
                 displayBoard(gameBoard);//展示遊戲地板
                 cout << endl << "You lost! :(" << endl;
-                gameOver = true;//ture已結束遊戲的遞迴
+                gameOver = true;//ture以結束遊戲的迴圈
             }
             else {
                 cout << "Illegal move. ";//無效的移動

@@ -1,11 +1,5 @@
 ﻿  Minesweeper.cpp
-C:\Users\ttp78\Desktop\3-minesweeper-main\minesweeper\minesweeper\Minesweeper.cpp(154,66): warning C4566: 由通用字元名稱 '\u00A1' 表示的字元，無法在目前的字碼頁中表示 (950)
-C:\Users\ttp78\Desktop\3-minesweeper-main\minesweeper\minesweeper\Minesweeper.cpp(154,66): warning C4566: 由通用字元名稱 '\u00F5' 表示的字元，無法在目前的字碼頁中表示 (950)
-C:\Users\ttp78\Desktop\3-minesweeper-main\minesweeper\minesweeper\Minesweeper.cpp(158,67): warning C4566: 由通用字元名稱 '\u00A1' 表示的字元，無法在目前的字碼頁中表示 (950)
-C:\Users\ttp78\Desktop\3-minesweeper-main\minesweeper\minesweeper\Minesweeper.cpp(158,67): warning C4566: 由通用字元名稱 '\u00F5' 表示的字元，無法在目前的字碼頁中表示 (950)
-C:\Users\ttp78\Desktop\3-minesweeper-main\minesweeper\minesweeper\Minesweeper.cpp(163,69): warning C4566: 由通用字元名稱 '\u00A1' 表示的字元，無法在目前的字碼頁中表示 (950)
-C:\Users\ttp78\Desktop\3-minesweeper-main\minesweeper\minesweeper\Minesweeper.cpp(167,70): warning C4566: 由通用字元名稱 '\u00A1' 表示的字元，無法在目前的字碼頁中表示 (950)
   main.cpp
-C:\Users\ttp78\Desktop\3-minesweeper-main\minesweeper\minesweeper\main.cpp(5,15): warning C4244: '引數': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
+C:\Users\user\OneDrive\力菁\文化\2物件導向程式設計\minesweeper\minesweeper\minesweeper\main.cpp(5,15): warning C4244: '引數': 將 'time_t' 轉換為 'unsigned int'，由於類型不同，可能導致資料遺失
   正在產生程式碼...
-  minesweeper.vcxproj -> C:\Users\ttp78\Desktop\3-minesweeper-main\minesweeper\x64\Debug\minesweeper.exe
+  minesweeper.vcxproj -> C:\Users\user\OneDrive\力菁\文化\2物件導向程式設計\minesweeper\minesweeper\x64\Debug\minesweeper.exe

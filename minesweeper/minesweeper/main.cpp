@@ -2,11 +2,11 @@
 
 int main() {
 
-    srand(time(0));/*砞﹚贺计*/
+    srand(time(0));//砞﹚贺计
 
     Minesweeper gameboard;
 
-    bool level = true;/*肚笴栏单タ絋*/
+    bool level = true;//砞﹚leveltrue磅︽while癹伴
     while (level) {
         cout << "Enter the Difficulty Level" << endl;
         cout << "Press 0 for 10 * 10 cells and 10 mines" << endl;
@@ -15,7 +15,7 @@ int main() {
 
         int board;
         cin >> board;
-        switch (board) {/*单ぃ狾縩筽计秖穦ぃ*/
+        switch (board) {//单ぃ狾縩筽计秖穦ぃ
         case 0:
             gameboard.setRows(10);
             gameboard.setColumns(10);
