@@ -181,51 +181,51 @@ void  Minesweeper::playMinesweeper() { //玩踩地雷
 
 
         if (nMoves == 0)//如果移動次數變為0
-            if (isMine(row, col, mineBoard))//如果回傳地雷的地雷版的索引沒有結果
-                replaceMine(row, col, mineBoard);//將重新設置地雷
+            if (isMine(row, col, mineBoard))//如果回傳地雷的地雷板的索引沒有結果
+                replaceMine(row, col, mineBoard);//將重新設置此地的地雷
 
-        if (z == 's') {//當z是安全的
-            if (gameBoard[row][col] == '.' && mineBoard[row][col] == '.') {//如果遊戲地板與地雷版的[行][列]顯示為'.'沒被踩到
-                uncoverBoard(gameBoard, mineBoard, row, col, &nMoves);//則開始揭開遊戲地板下面的地雷版
-                if (nMoves == nMovesTotal) {//如果移動的次數=移動的總數
-                    markMines(gameBoard, mineBoard, true);
-                    displayBoard(gameBoard);//展示遊戲地版
+        if (z == 's') { //當z是安全的
+            if (gameBoard[row][col] == '.' && mineBoard[row][col] == '.') { //如果遊戲地板與地雷板的[行][列]顯示為'.'，地雷沒被踩到
+                uncoverBoard(gameBoard, mineBoard, row, col, &nMoves);//則開始揭開遊戲地板下面的地雷板
+                if (nMoves == nMovesTotal) { //如果移動的次數=移動的總數
+                    markMines(gameBoard, mineBoard, true);//確認是否標記正確的地雷
+                    displayBoard(gameBoard);//展示遊戲地板
                     cout << endl << "You won!!! :)" << endl;
-                    gameOver = true;
+                    gameOver = true;//ture已結束遊戲的遞迴
                 }
             }
-            else if (gameBoard[row][col] == '.' && mineBoard[row][col] == '#') {//否則如果遊戲地板[行][列]顯示為'.'，地雷版為[行][列]顯示為'#'
+            else if (gameBoard[row][col] == '.' && mineBoard[row][col] == '#') { //否則如果遊戲地板[行][列]顯示為'.'，地雷版為[行][列]顯示為'#'
                 gameBoard[row][col] = '#';//地板顯示為'#'
-                markMines(gameBoard, mineBoard, false);
-                displayBoard(gameBoard);//展示遊戲地版
+                markMines(gameBoard, mineBoard, false);//確認是否標記正確的地雷
+                displayBoard(gameBoard);//展示遊戲地板
                 cout << endl << "You lost! :(" << endl;
-                gameOver = true;
+                gameOver = true;//ture已結束遊戲的遞迴
             }
             else {
-                cout << "Illegal move. ";//違規的移動
+                cout << "Illegal move. ";//無效的移動
                 if (gameBoard[row][col] == 'F')
-                    cout << "Cell is a flag. Use f to toggle flag off. ";
+                    cout << "Cell is a flag. Use f to toggle flag off. ";//此地已插旗，拔掉旗幟
                 else
-                    cout << "Cell is already a number. ";
+                    cout << "Cell is already a number. ";//地板已被揭開為數字
                 cout << endl;
             }
         }
-        if (z == 'f') {//如果z=地雷
-            if (gameBoard[row][col] == '.') {
-                if (flags != 0) {//如果地雷!=0
-                    gameBoard[row][col] = 'F';//地板安全
+        if (z == 'f') { //如果z=地雷
+            if (gameBoard[row][col] == '.') { //遊戲板未被走過
+                if (flags != 0) { //如果地雷數 !=0
+                    gameBoard[row][col] = 'F';//地板插旗
                     flags--;//地雷減少
                 }
                 else {
-                    cout << "Illegal move. Too many flags!" << endl;
+                    cout << "Illegal move. Too many flags!" << endl;//顯示無效移動，插太多旗(多於地雷數)
                 }
             }
-            else if (gameBoard[row][col] == 'F') {//否則如果z不是地雷
-                gameBoard[row][col] = '.';
+            else if (gameBoard[row][col] == 'F') { //否則如果z已標為地雷(已插旗)
+                gameBoard[row][col] = '.';//把標旗移除
                 flags++;//地雷增加
             }
             else {
-                cout << "Illegal move. Cell is a number. " << endl;
+                cout << "Illegal move. Cell is a number. " << endl;//顯示無效移動，此為數字
             }
         }
     }
