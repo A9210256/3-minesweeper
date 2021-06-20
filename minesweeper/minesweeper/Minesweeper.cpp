@@ -82,11 +82,11 @@ void  Minesweeper::displayBoard(char gameBoard[][30]) { //設置展示遊戲版�
     return;
 }
 bool  Minesweeper::isValid(int row, int col) { //行列的數目是否為正確
-    return (row >= 0) && (row < ROWS) && (col >= 0) && (col < COLUMNS);//回傳1 or 0(行>=0和行<設置的數目)和(列>=0和列<設置的數目)
+    return (row >= 0) && (row < ROWS) && (col >= 0) && (col < COLUMNS);//回傳 1 or 0 (行>=0和行<設置的數目)和(列>=0和列<設置的數目)
 }
 
 bool  Minesweeper::isMine(int row, int col, char board[][30]) { //回傳地雷的數目是否為正確，且放置在地板之內
-    return (board[row][col] == '#');//回傳1 or 0(地板的位置)
+    return (board[row][col] == '#');//回傳 1 or 0 (地板的位置)
 }
 vector < pair <int, int> >  Minesweeper::getNeighbours(int row, int col) { //陣列的pair可以將一對值，合成一個值
     vector < pair <int, int> > neighbours;//陣列的pair可以將一對值，合成一個值，給neighbours這個變數
@@ -97,7 +97,7 @@ vector < pair <int, int> >  Minesweeper::getNeighbours(int row, int col) { //陣
                 if (isValid(row + dx, col + dy))
                     neighbours.push_back(make_pair(row + dx, col + dy));//變數neighbours新增一個元素到最後面，由傳給make_pair的值產生一個新的pair
 
-    return neighbours;
+    return neighbours;//將其值回傳
 }
 int  Minesweeper::countAdjacentMines(int row, int col, char mineBoard[][30]) { //數相鄰的地雷數目
     vector < pair <int, int> > neighbours = getNeighbours(row, col);//陣列的pair可以將一對值，合成一個值給neighbours，產生getNeighbours(新的pair)
@@ -112,20 +112,20 @@ int  Minesweeper::countAdjacentMines(int row, int col, char mineBoard[][30]) { /
 void  Minesweeper::uncoverBoard(char gameBoard[][30], char mineBoard[][30], int row, int col, int* nMoves) { //設置揭開地板(移動)
     (*nMoves)++;//移動的位值增加
     int count = countAdjacentMines(row, col, mineBoard);//數目=相鄰的地雷數目
-    gameBoard[row][col] = count + '0';//遊戲版的[行][列]=數目+48(變成字元
+    gameBoard[row][col] = count + '0';//遊戲版的[行][列]=數目+48(變成字元)
     if (count == 0) {//如果數目=0
         vector < pair <int, int> > neighbours = getNeighbours(row, col);//陣列的pair可以將一對值，合成一個值給neighbours，產生getNeighbours(新的pair)
 
-        for (int i = 0; i < neighbours.size(); i++)
+        for (int i = 0; i < neighbours.size(); i++) //直到揭到有周圍有地雷數目的地板為止
             if (gameBoard[neighbours[i].first][neighbours[i].second] == '.')//如果遊戲版的[行][列]='.'
                 uncoverBoard(gameBoard, mineBoard, neighbours[i].first, neighbours[i].second, nMoves);//揭開地板(遊戲地板,地雷地板,[行],[列],移動的位置)
     }
 }
 
-void  Minesweeper::markMines(char gameBoard[][30], char mineBoard[][30], bool won) {//確認是否標記正確的地雷
+void  Minesweeper::markMines(char gameBoard[][30], char mineBoard[][30], bool won) { //確認是否標記正確的地雷
     for (int i = 0; i < ROWS; i++) {
         for (int j = 0; j < COLUMNS; j++) {
-            if (gameBoard[i][j] == '.' && mineBoard[i][j] == '#') {//如果遊戲版安全的行列顯示'.'與地雷版的行列顯示'#'
+            if (gameBoard[i][j] == '.' && mineBoard[i][j] == '#') { //如果遊戲版安全的行列顯示'.'與地雷版的行列顯示'#'
                 if (won) {
                     gameBoard[i][j] = 'F';//如果贏了，地板會顯示'F'
                 }
@@ -136,7 +136,7 @@ void  Minesweeper::markMines(char gameBoard[][30], char mineBoard[][30], bool wo
         }
     }
 }
-void  Minesweeper::playMinesweeper() {//玩踩地雷
+void  Minesweeper::playMinesweeper() { //玩踩地雷
     char mineBoard[30][30], gameBoard[30][30];//地雷的數[行=30][列=30],安全地的數[行=30][列=30]
     int nMovesTotal = ROWS * COLUMNS - MINES;//移動次數=行數*列數-地雷數
     int flags = MINES;//設一個變數為地雷數
@@ -144,35 +144,35 @@ void  Minesweeper::playMinesweeper() {//玩踩地雷
     placeMines(mineBoard, MINES);//設置地雷
 
     int nMoves = 0;//設置一開始移動次數為0
-    bool gameOver = false;//回傳遊戲結束為false
+    bool gameOver = false;//設遊戲結束為false
 
-    while (!gameOver) {//當不是遊戲結束
+    while (!gameOver) { //當遊戲還沒結束時
         displayBoard(gameBoard);//展示遊戲地板
-        cout << flags << " flags left" << endl << endl;//剩下的地雷
-        char x, y, z;
+        cout << flags << " flags left" << endl << endl;//輸出剩下的地雷
+        char x, y, z;//設要輸入的值
         //開始遊戲
-        cout << "Enter your move(0~" << indexToChar(ROWS - 1) << "), (¡õ) -> ";//確定移動，開始索引轉變字元(行-1)
-        cin >> x;
+        cout << "Enter your move(0~" << indexToChar(ROWS - 1) << "), (¡õ) -> ";//顯示輸入移動，開始索引轉變字元(行-1)
+        cin >> x;//輸入移動(行)
         int row = charToIndex(x);//設置行=字元索引(x)
-        while (row >= ROWS) {//當移動行的次數>行設置的數目
+        while (row >= ROWS) { //當移動行的次數>行設置的數目，再輸入一次
             cout << "Please enter(0~" << indexToChar(ROWS - 1) << "), (¡õ) ->";
             cin >> x;
             row = charToIndex(x);//行=字元索引(x)
         }
 
         cout << "Enter your move(0~" << indexToChar(COLUMNS - 1) << "), (¡÷) -> ";
-        cin >> y;
+        cin >> y;//輸入移動(列)
         int col = charToIndex(y);//設置列=字元索引(y)
-        while (col >= COLUMNS) {//當移動列的次數>列設置的數目
+        while (col >= COLUMNS) { //當移動列的次數>列設置的數目，再輸入一次
             cout << "Please enter(0~" << indexToChar(COLUMNS - 1) << "), (¡÷) ->";
             cin >> y;
             col = charToIndex(y);//列=字元索引(y)
         }
 
         cout << "Enter your move, (safe(s)/flag(f)) -> ";//確認你的移動，安全(s),地雷(f)
-        cin >> z;
-        while (z != 's' && z != 'S' && z != 'f' && z != 'F') {//當z不是輸入s也不是f
-            cout << "Please enter(safe(s)/flag(f)) -> ";//請確認安全(s),地雷(f)
+        cin >> z;//輸入要選擇，揭開地板還是插旗標示地雷
+        while (z != 's' && z != 'S' && z != 'f' && z != 'F') { //當z不是輸入s也不是f，再輸入一次
+            cout << "Please enter(safe(s)/flag(f)) -> ";//請輸入安全(s),地雷(f)
             cin >> z;
         }
 
